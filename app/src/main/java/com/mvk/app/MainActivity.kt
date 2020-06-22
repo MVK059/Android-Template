@@ -1,4 +1,4 @@
-package com.ncorti.kotlin.template.app
+package com.mvk.app
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
