@@ -9,6 +9,12 @@ plugins {
     id("com.github.ben-manes.versions") version BuildPluginsVersion.VERSIONS_PLUGIN
 }
 
+buildscript {
+    dependencies {
+        classpath("com.google.dagger:hilt-android-gradle-plugin:2.28-alpha")
+    }
+}
+
 allprojects {
     group = PUBLISHING_GROUP
     repositories {
