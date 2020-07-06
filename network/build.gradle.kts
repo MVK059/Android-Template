@@ -4,6 +4,7 @@ plugins {
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
+    id("dagger.hilt.android.plugin")
 }
 
 
@@ -23,8 +24,12 @@ android {
     }
 
     buildTypes {
-        getByName("release") {
+        getByName("debug") {
             isMinifyEnabled = false
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+        }
+        getByName("release") {
+            isMinifyEnabled = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
@@ -35,12 +40,12 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
     implementation(Dependencies.kotlin)
-    implementation(Dependencies.retrofit)
     implementation(Dependencies.coroutines)
-
+    implementation(Dependencies.gson)
 
     appCompat()
     defaultTests()
     kotlinSerialization()
-
+    hilt()
+    retrofit()
 }

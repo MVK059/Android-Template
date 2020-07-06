@@ -3,6 +3,7 @@ plugins {
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
+    id("dagger.hilt.android.plugin")
 }
 
 
@@ -42,5 +43,6 @@ dependencies {
     defaultTests()
     room()
     lifecycle()
+    hilt()
 
 }

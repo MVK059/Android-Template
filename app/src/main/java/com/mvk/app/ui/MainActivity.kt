@@ -1,68 +1,27 @@
 package com.mvk.app.ui
 
 import android.os.Bundle
-import android.view.View
-import android.widget.Toast
-import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.mvk.app.BR
 import com.mvk.app.R
-import com.mvk.app.data.model.User
-import com.mvk.app.utils.Status
+import com.mvk.base.di.ActivityScope
+import com.mvk.base.ui.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_main.*
+import javax.inject.Inject
 
-@AndroidEntryPoint(value = MainActivity::class)
-class MainActivity : AppCompatActivity() {
 
-    private val mainViewModel : MainViewModel by viewModels()
-    private lateinit var adapter: MainAdapter
+@AndroidEntryPoint
+class MainActivity : BaseActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        setupUI()
-        setupObserver()
+    @Inject
+    @ActivityScope
+    lateinit var viewModelNew: MainViewModel
 
-    }
+    override fun provideDataBindingVariable(): Int = BR.mainVM
 
-    private fun setupUI() {
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = MainAdapter(arrayListOf())
-        recyclerView.addItemDecoration(
-            DividerItemDecoration(
-                recyclerView.context,
-                (recyclerView.layoutManager as LinearLayoutManager).orientation
-            )
-        )
-        recyclerView.adapter = adapter
-    }
+    override fun provideLayoutId(): Int = R.layout.activity_main
 
-    private fun setupObserver() {
-        mainViewModel.users.observe(this, Observer {
-            when (it.status) {
-                Status.SUCCESS -> {
-                    progressBar.visibility = View.GONE
-                    it.data?.let { users -> renderList(users) }
-                    recyclerView.visibility = View.VISIBLE
-                }
-                Status.LOADING -> {
-                    progressBar.visibility = View.VISIBLE
-                    recyclerView.visibility = View.GONE
-                }
-                Status.ERROR -> {
-                    //Handle Error
-                    progressBar.visibility = View.GONE
-                    Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
-                }
-            }
-        })
-    }
+    override fun setupView(savedInstanceState: Bundle?) {}
 
-    private fun renderList(users: List<User>) {
-        adapter.addData(users)
-        adapter.notifyDataSetChanged()
-    }
+    override fun provideViewModel() = viewModelNew
+
 }
