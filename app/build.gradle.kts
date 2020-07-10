@@ -4,7 +4,6 @@ plugins {
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
-    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -50,6 +49,10 @@ android {
     dataBinding {
         isEnabled = true
     }
+
+    kapt {
+        correctErrorTypes = true
+    }
 }
 
 dependencies {
@@ -76,7 +79,7 @@ dependencies {
     lifecycle()
     room()
     retrofit()
-    hilt()
+    dagger()
     glide()
     rxjava()
 }

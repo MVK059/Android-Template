@@ -9,7 +9,6 @@ buildscript {
         classpath(Dependencies.gradlePlugin)
         classpath(Dependencies.kotlinGradlePlugin)
         classpath(Dependencies.kotlinSerializationPlugin)
-        classpath(Dependencies.hilt_dagger_main)
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }

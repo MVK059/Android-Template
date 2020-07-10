@@ -1,27 +1,36 @@
 package com.mvk.app.ui
 
 import android.os.Bundle
+import android.widget.Toast
 import com.mvk.app.BR
 import com.mvk.app.R
-import com.mvk.base.di.ActivityScope
+import com.mvk.app.databinding.ActivityMainBinding
+import com.mvk.app.di.component.DaggerMainActivityComponent
+import com.mvk.base.di.InjectUtils
 import com.mvk.base.ui.BaseActivity
-import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-
-@AndroidEntryPoint
-class MainActivity : BaseActivity() {
+class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     @Inject
-    @ActivityScope
-    lateinit var viewModelNew: MainViewModel
+    lateinit var mainViewModel: MainViewModel
+
+    @Inject
+    lateinit var hello: String
 
     override fun provideDataBindingVariable(): Int = BR.mainVM
 
     override fun provideLayoutId(): Int = R.layout.activity_main
 
-    override fun setupView(savedInstanceState: Bundle?) {}
+    override fun setupView(savedInstanceState: Bundle?) {
+        DaggerMainActivityComponent
+            .builder()
+            .baseComponent(InjectUtils.provideBaseComponent(applicationContext))
+            .build()
+            .inject(this)
 
-    override fun provideViewModel() = viewModelNew
+        Toast.makeText(this, hello, Toast.LENGTH_LONG).show()
+    }
 
+    override fun provideViewModel() = mainViewModel
 }

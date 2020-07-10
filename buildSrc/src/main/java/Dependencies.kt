@@ -128,12 +128,8 @@ fun DependencyHandler.defaultTests() {
     androidTestImplementation(Dependencies.espresso)
 }
 
-fun DependencyHandler.hilt() {
-    implementation(Dependencies.hilt_dagger)
-    implementation(Dependencies.hilt_dagger_vm)
+fun DependencyHandler.dagger() {
     implementation(Dependencies.dagger)
-    kapt(Dependencies.hilt_dagger_compiler)
-    kapt(Dependencies.hilt_dagger_vm_compiler)
     kapt(Dependencies.dagger_compiler)
 }
 

@@ -4,7 +4,6 @@ plugins {
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
-    id("dagger.hilt.android.plugin")
 }
 
 
@@ -45,6 +44,10 @@ android {
         isEnabled = true
     }
 
+    kapt {
+        correctErrorTypes = true
+    }
+
 }
 
 dependencies {
@@ -65,7 +68,7 @@ dependencies {
     kotlinSerialization()
     lifecycle()
     room()
-    hilt()
+    dagger()
     rxjava()
     glide()
 

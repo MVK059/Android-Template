@@ -8,41 +8,31 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
 import com.mvk.base.utils.display.Toaster
-import dagger.hilt.android.AndroidEntryPoint
 
-/**
- * Reference for generics: https://kotlinlang.org/docs/reference/generics.html
- * Basically BaseActivity will take any class that extends BaseViewModel
- */
-@AndroidEntryPoint
-abstract class BaseActivity() : AppCompatActivity() {
+abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
 
-//    @ActivityScope
-//    @Inject
     lateinit var viewModel: BaseViewModel
 
-    lateinit var dataBinding: ViewDataBinding
+    lateinit var dataBinding: T
 
     override fun onCreate(savedInstanceState: Bundle?) {
 //        injectDependencies(buildActivityComponent())
         super.onCreate(savedInstanceState)
         viewModel = provideViewModel()
-//        provideViewModel().onCreate()
         viewModel.onCreate()
         setupDataBinding()
-//        setContentView(provideLayoutId())
         setupObservers()
         setupView(savedInstanceState)
     }
 
-//    fun getViewDataBinding(): T = dataBinding
+    fun getViewDataBinding(): T = dataBinding
 
-    /*private fun buildActivityComponent() =
-        DaggerActivityComponent
-            .builder()
-            .applicationComponent((application as InstagramApplication).applicationComponent)
-            .activityModule(ActivityModule(this))
-            .build()*/
+//    private fun buildActivityComponent() =
+//        DaggerBaseComponent
+//            .builder()
+//            .baseModule(BaseModule(application))
+//            .build()
+//            .inject(application)
 
     protected open fun setupObservers() {
         viewModel.messageString.observe(this, Observer {
@@ -82,7 +72,7 @@ abstract class BaseActivity() : AppCompatActivity() {
     @LayoutRes
     protected abstract fun provideLayoutId(): Int
 
-//    protected abstract fun injectDependencies(activityComponent: ActivityComponent)
+//    protected abstract fun injectDependencies(baseComponent: BaseComponent)
 
     protected abstract fun setupView(savedInstanceState: Bundle?)
 
