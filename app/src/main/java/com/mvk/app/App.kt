@@ -1,8 +1,8 @@
 package com.mvk.app
 
-import androidx.multidex.MultiDexApplication
+import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-class App : MultiDexApplication() {
+class App : Application() {
 }

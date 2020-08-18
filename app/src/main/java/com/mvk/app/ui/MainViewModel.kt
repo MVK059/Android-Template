@@ -1,19 +1,13 @@
 package com.mvk.app.ui
 
-import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.*
-import com.mvk.app.data.model.User
-import com.mvk.app.data.repository.MainRepository
+import androidx.lifecycle.ViewModel
 import com.mvk.app.utils.NetworkHelper
-import com.mvk.app.utils.Resource
-import kotlinx.coroutines.launch
 
-class MainViewModel @ViewModelInject constructor(
-    private val mainRepository: MainRepository,
+class MainViewModel(
     private val networkHelper: NetworkHelper
 ) : ViewModel() {
 
-    private val _users = MutableLiveData<Resource<List<User>>>()
+    /*private val _users = MutableLiveData<Resource<List<User>>>()
     val users: LiveData<Resource<List<User>>>
         get() = _users
 
@@ -32,5 +26,5 @@ class MainViewModel @ViewModelInject constructor(
                 }
             } else _users.postValue(Resource.error("No internet connection", null))
         }
-    }
+    }*/
 }

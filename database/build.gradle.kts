@@ -3,9 +3,8 @@ plugins {
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
+    id("dagger.hilt.android.plugin")
 }
-
-
 
 android {
     compileSdkVersion(Application.COMPILE_SDK_VERSION)
@@ -42,5 +41,6 @@ dependencies {
     defaultTests()
     room()
     lifecycle()
+    hilt()
 
 }

@@ -11,7 +11,7 @@ android {
     compileSdkVersion(Application.COMPILE_SDK_VERSION)
     buildToolsVersion = Versions.BUILD_TOOLS_VERSION
     defaultConfig {
-        applicationId = "com.restaurantfinder"
+        applicationId = "com.mvk"
         minSdkVersion(Application.MIN_SDK_VERSION)
         targetSdkVersion(Application.TARGET_SDK_VERSION)
         versionCode = Application.VERSION_CODE
@@ -37,7 +37,6 @@ android {
     dataBinding {
         isEnabled = true
     }
-
 }
 
 dependencies {
@@ -50,14 +49,13 @@ dependencies {
     // Individual dependencies
     implementation(Dependencies.kotlin)
     implementation(Dependencies.coroutines)
-    implementation(Dependencies.koin)
     implementation(Dependencies.transition)
     implementation(Dependencies.recyclerView)
+    implementation(Dependencies.cardView)
     implementation(Dependencies.constraintLayout)
-    implementation(Dependencies.picasso)
-    implementation(Dependencies.location)
+    implementation(Dependencies.timber)
+    implementation(Dependencies.gson)
     implementation(Dependencies.retrofit)
-
 
     // Groups of dependencies
     appCompat()
@@ -66,5 +64,6 @@ dependencies {
     lifecycle()
     room()
     hilt()
-
+    glide()
+    rxjava()
 }
